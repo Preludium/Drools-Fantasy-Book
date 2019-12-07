@@ -1,0 +1,35 @@
+package com.sample
+
+import static com.sample.DroolsTest.*;
+ 
+declare Action
+	question: String
+	answer: String
+end
+ 
+rule "Init"
+	when
+	then
+		Action a = new Action("Are you going to be upset when you don't find Harry Potter?", null);
+		String[] answers = { "Yes", "No" };
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);		
+        insert(a);
+end
+
+rule "Give me more precocious lads at schools of magic, please."
+	when
+		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "Yes")
+	then
+		showAnswer("The Kingkiller Chronicles, Patrick Rothfuss");
+end
+
+rule "I know where to find him if I need him."
+	when
+		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "No")
+	then
+		Action a = new Action("Are you new to fantasy genre?", null);
+		String[] answers = { "Yes", "No", "Maybe" };
+ 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+ 		insert(a);
+end
+
