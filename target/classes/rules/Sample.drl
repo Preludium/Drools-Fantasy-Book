@@ -1,0 +1,35 @@
+package com.sample;
+
+import javax.swing.JOptionPane;
+ 
+declare Action
+	question: String
+	answer: String
+end
+ 
+rule "Init"
+	when
+	then
+		String question = "Are you going to be upset when you don't find Harry Potter?";
+		int option = JOptionPane.showConfirmDialog(null, question, "Question", JOptionPane.YES_NO_OPTION);
+        insert(new Action(question, option==0 ? "Yes" : "No"));
+end
+
+rule "Give me more precocious lads at schools of magic, please."
+	when
+		a: Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "Yes")
+	then
+		JOptionPane.showMessageDialog(null, "The Kingkiller Chronicles, Patrick Rothfuss", "Answer", JOptionPane.INFORMATION_MESSAGE);
+end
+
+rule "I know where to find him if I need him."
+	when
+		a: Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "No")
+	then
+		String question = "Are you new to fantasy genre?";
+		Object[] options = { "Yes", "No", "Maybe" };
+ 		int option = JOptionPane.showOptionDialog(null, question, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+ 		insert(new Action(question, option == 0 ? "Yes" : option == 1 ? "No" : "Maybe"));
+end
+
+// itd.
