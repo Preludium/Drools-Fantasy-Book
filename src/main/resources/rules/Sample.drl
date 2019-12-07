@@ -20,7 +20,7 @@ rule "Give me more precocious lads at schools of magic, please."
 	when
 		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "Yes")
 	then
-		showAnswer("The Kingkiller Chronicles, Patrick Rothfuss");
+		showAnswer("\"The Kingkiller Chronicles\" Patrick Rothfuss");
 end
 
 rule "I know where to find him if I need him."
@@ -33,3 +33,32 @@ rule "I know where to find him if I need him."
  		insert(a);
 end
 
+rule "I am as yet unfamiliar with your tropes. Do your worst."
+	when
+		Action(question == "Are you new to the fantasy genre?" && answer == "Yes")
+	then
+		System.out.println("Yes");
+		Action a = new Action("\"The Lord of the Rings\" J. R. R. Tolkien", null);
+		String[] answers = {"Ok", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I'm what you call, experienced."
+	when
+		Action(question == "Are you new to the fantasy genre?" && answer == "No")
+	then
+		System.out.println("NO");
+		Action a = new Action("Like the Arthurian legend?", null);
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Does the Wizard of Oz count?"
+	when
+		Action(question == "Are you new to the fantasy genre?" && answer == "Maybe")
+	then
+		System.out.println("HALO\n");
+		showAnswer("\"Wicked\" Gregory Macguire");
+end
