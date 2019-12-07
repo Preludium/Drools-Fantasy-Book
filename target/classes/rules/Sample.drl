@@ -3,14 +3,14 @@ package com.sample
 import static com.sample.DroolsTest.*;
  
 declare Action
-	question: String
+	question: String @key
 	answer: String
 end
  
 rule "Init"
 	when
 	then
-		Action a = new Action("Are you going to be upset when you don't find Harry Potter?", null);
+		Action a = new Action("Are you going to be upset when you don't find Harry Potter?");
 		String[] answers = { "Yes", "No" };
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);		
         insert(a);
@@ -27,7 +27,7 @@ rule "I know where to find him if I need him."
 	when
 		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "No")
 	then
-		Action a = new Action("Are you new to fantasy genre?", null);
+		Action a = new Action("Are you new to the fantasy genre?");
 		String[] answers = { "Yes", "No", "Maybe" };
  		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
  		insert(a);
@@ -37,8 +37,7 @@ rule "I am as yet unfamiliar with your tropes. Do your worst."
 	when
 		Action(question == "Are you new to the fantasy genre?" && answer == "Yes")
 	then
-		System.out.println("Yes");
-		Action a = new Action("\"The Lord of the Rings\" J. R. R. Tolkien", null);
+		Action a = new Action("\"The Lord of the Rings\" J. R. R. Tolkien");
 		String[] answers = {"Ok", "No"};
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
 		insert(a);
@@ -48,8 +47,7 @@ rule "I'm what you call, experienced."
 	when
 		Action(question == "Are you new to the fantasy genre?" && answer == "No")
 	then
-		System.out.println("NO");
-		Action a = new Action("Like the Arthurian legend?", null);
+		Action a = new Action("Like the Arthurian legend?");
 		String[] answers = {"Yes", "No"};
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
 		insert(a);
@@ -59,6 +57,55 @@ rule "Does the Wizard of Oz count?"
 	when
 		Action(question == "Are you new to the fantasy genre?" && answer == "Maybe")
 	then
-		System.out.println("HALO\n");
 		showAnswer("\"Wicked\" Gregory Macguire");
 end
+
+// JANEK
+rule "The other two options ended with some strange choices."
+	when
+		Action(question == "Ready to dive into a series?" && answer == "Yes")
+	then
+		Action a = new Action("Does the series have to be finished?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Yes, the series have to be finished."
+	when
+		Action(question == "Does the series have to be finished?" && answer == "Yes")
+	then
+		Action a = new Action("Do the words Sword and Sorcery have a positive connotation for you?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I like to be held in suspense. Preferably for years at a time."
+	when
+		Action(question == "Does the series have to be finished?" && answer == "No")
+	then
+		Action a = new Action("Take the high road or the low road?");
+		String[] answers = {"Low Fantasy", "High Fantasy"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Low Fantasy"
+	when
+		Action(question == "Take the high road or the low road?" && answer == "Low Fantasy")
+	then
+		showAnswer("\"A Song of Ice and Fire\" George R.R. Martin");
+end
+
+rule "High Fantasy"
+	when
+		Action(question == "Take the high road or the low road?", && answer == "High Fantasy")
+	then
+		showAnswer("\"The Way of Kings\" Brandon Sanderson");
+end
+
+
+
+
+
