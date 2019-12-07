@@ -287,7 +287,7 @@ end
 
 rule "What's your pleasure?, Relugious Satire"
 	when
-		Action(question == "What's your pleasure?" && answer == "Relugious Satire")
+		Action(question == "What's your pleasure?" && answer == "Religious Satire")
 	then
 		showAnswer("\"Small Gods\" Terry Pratchett");
 end
