@@ -59,3 +59,242 @@ rule "Does the Wizard of Oz count?"
 	then
 		showAnswer("\"Wicked\" Gregory Macguire");
 end
+
+rule "I'm not that new"
+	when
+		Action(question == "\"The Lord of the Rings\" J. R. R. Tolkien" && answer == "No")
+	then
+		showAnswer("\"The Silmarillon\" J. R. R. Tolkien");
+end
+	
+rule "\"The Lord of the Rings\" J. R. R. Tolkien, OK"
+	when
+		Action(question == "\"The Lord of the Rings\" J. R. R. Tolkien" && answer == "Ok")
+	then
+		showAnswer("\"The Lord of the Rings\" J. R. R. Tolkien");
+end
+
+rule "I own The Sword and the Stone on DVD and VHS."
+	when
+		Action(question == "Like the Arthurian legend?" && answer == "Yes")
+	then
+		Action a = new Action("Which character do you like best?");
+		String[] answers = {"Morgan Le Faye", "Merlin", "Arthur"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Like the Arthurian legend?, No"
+	when
+		Action(question == "Like the Arthurian legend?" && answer == "No")
+	then
+		Action a = new Action("Looking for modern-day settings?");
+		String[] answers = {"Yes", "No", "Maybe"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Which character do you like best?, Morgan Le Faye"
+	when
+		Action(question == "Which character do you like best?" && answer == "Morgan Le Faye")
+	then
+		showAnswer("\"The Mists of Avalon\" Marion Zimmer Bradley");
+end
+
+rule "Which character do you like best?, Merlin"
+	when
+		Action(question == "Which character do you like best?" && answer == "Merlin")
+	then
+		showAnswer("\"The Crystal Cave\" Mary Steward");
+end
+
+rule "Which character do you like best?, Arthur"
+	when
+		Action(question == "Which character do you like best?" && answer == "Arthur")
+	then
+		showAnswer("\"The Once and Future King\" T. H. White");
+end
+
+rule "I'm a city-person"
+	when
+		Action(question == "Looking for modern-day settings?" && answer == "Yes")
+	then
+		Action a = new Action("Gods or people under the streets?");
+		String[] answers = {"Modern Mythology", "A world beneath the city"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Let's find another world, this one's depressing."
+	when
+		Action(question == "Looking for modern-day settings?" && answer == "No")
+	then
+		Action a = new Action("Fan of Westerns?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I'm partial to small towns."
+	when
+		Action(question == "Looking for modern-day settings?" && answer == "Maybe")
+	then
+		showAnswer("\"Something Wicked This Way Comes\" Ray Bradbury");
+end
+
+rule "Gods or people under the streets?, Modern Mythology"
+	when
+		Action(question == "Gods or people under the streets?" && answer == "Modern Mythology")
+	then
+		showAnswer("\"American Gods\" Neil Gaiman");
+end
+
+rule "Gods or people under the streets?, A world beneath the city"
+	when
+		Action(question == "Gods or people under the streets?" && answer == "A world beneath the city")
+	then
+		showAnswer("\"Neverwhere\" Neil Gaiman");
+end
+
+rule "I'm prone to don champs and walk the streets at high noon."
+	when
+		Action(question == "Looking for modern-day settings?" && answer == "Yes")
+	then
+		showAnswer("\"The Dark Tower\" Stephen King");
+end
+
+rule "Too dusty. And I'm not much of a card player."
+	when
+		Action(question == "Looking for modern-day settings?" && answer == "No")
+	then
+		Action a = new Action("Animals more your thing?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I donate to the WWF. Not the wrestling one."
+	when
+		Action(question == "Animals more your thing?" && answer == "Yes")
+	then
+		Action a = new Action("What's your ideal pet?");
+		String[] answers = {"Unicorn", "Bunny", "Dragon"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I have allergies."
+	when
+		Action(question == "Animals more your thing?" && answer == "No")
+	then
+		Action a = new Action("How about some alternate history?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "What's your ideal pet?, Unicorn"
+	when
+		Action(question == "What's your ideal pet?" && answer == "Unicorn")
+	then
+		showAnswer("\"The Last Unicorn\" Peter S. Beagle");
+end
+
+rule "What's your ideal pet?, Bunny"
+	when
+		Action(question == "What's your ideal pet?" && answer == "Bunny")
+	then
+		showAnswer("\"Watership Down\" Richard Adams");
+end
+
+rule "What's your ideal pet?, Dragon"
+	when
+		Action(question == "What's your ideal pet?" && answer == "Dragon")
+	then
+		showAnswer("\"Dragonflight\" Anne McCaffrey");
+end
+
+rule "I'm a revisionist myself."
+	when
+		Action(question == "How about some alternate history?" && answer == "Yes")
+	then
+		Action a = new Action("Romance or warring magicians?");
+		String[] answers = {"Romance", "Magicians"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "I never paid any attencion in history class."
+	when
+		Action(question == "How about some alternate history?" && answer == "No")
+	then
+		Action a = new Action("Ready to dive into a series?");
+		String[] answers = {"Yes", "No", "Maybe"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Romance or warring magicians?, Romance"
+	when
+		Action(question == "Romance or warring magicians?" && answer == "Romance")
+	then
+		showAnswer("\"Kushiel's Legacy Series\" Jacqueline Carey");
+end
+
+rule "Romance or warring magicians?, Magicians"
+	when
+		Action(question == "Romance or warring magicians?" && answer == "Magicians")
+	then
+		showAnswer("\"Jonathan Strange & Mr. Norrell\" Susanne Clarke");
+end
+
+rule "The other two options ended with some strange choices."
+	when
+		Action(question == "Ready to dive into a series?" && answer == "Yes")
+	then
+		Action a = new Action("Does the series have to be finished?");
+		String[] answers = {"Yes", "No"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "Let's keep this casual."
+	when
+		Action(question == "Ready to dive into a series?" && answer == "No")
+	then
+		Action a = new Action("With pirates or without?");
+		String[] answers = {"Pirates Please", "No pirates here. \nNo siree, Bob. \nNo pirates at all"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "How about an episodic series?"
+	when
+		Action(question == "Ready to dive into a series?" && answer == "Maybe")
+	then
+		Action a = new Action("What's your pleasure?");
+		String[] answers = {"Bureaucratic Satire", "Religious Satire", "Fun with Puns"};
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+
+rule "What's your pleasure?, Bureaucratic Satire"
+	when
+		Action(question == "What's your pleasure?" && answer == "Bureaucratic Satire")
+	then
+		showAnswer("\"Going Postal\" Terry Pratchett");
+end
+
+rule "What's your pleasure?, Relugious Satire"
+	when
+		Action(question == "What's your pleasure?" && answer == "Relugious Satire")
+	then
+		showAnswer("\"Small Gods\" Terry Pratchett");
+end
+
+rule "What's your pleasure?, Fun with Puns"
+	when
+		Action(question == "What's your pleasure?" && answer == "Fun with Puns")
+	then
+		showAnswer("\"Xanth Series\" Piers Anthony");
+end
