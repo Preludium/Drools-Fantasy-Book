@@ -263,7 +263,7 @@ rule "Let's keep this casual."
 		Action(question == "Ready to dive into a series?" && answer == "No")
 	then
 		Action a = new Action("With pirates or without?");
-		String[] answers = {"Pirates Please", "No pirates here. \nNo siree, Bob. \nNo pirates at all"};
+		String[] answers = {"Pirates Please", "No pirates here. No siree, Bob. No pirates at all"};
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
 		insert(a);
 end
