@@ -19,16 +19,11 @@ public class DroolsTest {
     }
     
     public static int askQuestion(String question, String[] answers) {
-      int n = JOptionPane.showOptionDialog(null,
-          question,
-          null,
-          JOptionPane.YES_NO_OPTION,
-          JOptionPane.QUESTION_MESSAGE,
-          null,
-          answers,
-          answers[0]);
-      
-      return n;
-  }
+    	return JOptionPane.showOptionDialog(null, question, null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, answers, answers[0]);
+    }
+    
+    public static void showAnswer(String answer) {
+    	JOptionPane.showMessageDialog(null, answer, "Answer", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

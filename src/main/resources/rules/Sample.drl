@@ -1,6 +1,6 @@
-package com.sample;
+package com.sample
 
-import com.sample.DroolsTest.*;
+import static com.sample.DroolsTest.*;
  
 declare Action
 	question: String
@@ -16,21 +16,20 @@ rule "Init"
         insert(a);
 end
 
-/*rule "Give me more precocious lads at schools of magic, please."
+rule "Give me more precocious lads at schools of magic, please."
 	when
-		a: Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "Yes")
+		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "Yes")
 	then
-		JOptionPane.showMessageDialog(null, "The Kingkiller Chronicles, Patrick Rothfuss", "Answer", JOptionPane.INFORMATION_MESSAGE);
+		showAnswer("The Kingkiller Chronicles, Patrick Rothfuss");
 end
 
 rule "I know where to find him if I need him."
 	when
-		a: Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "No")
+		Action(question == "Are you going to be upset when you don't find Harry Potter?" && answer == "No")
 	then
-		String question = "Are you new to fantasy genre?";
-		String[] options = { "Yes", "No", "Maybe" };
- 		int option = JOptionPane.showOptionDialog(null, question, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
- 		insert(new Action(question, options[option]));
-end*/
+		Action a = new Action("Are you new to fantasy genre?", null);
+		String[] answers = { "Yes", "No", "Maybe" };
+ 		a.setAnswer(answers[askQuestion(a.question, answers)]);
+ 		insert(a);
+end
 
-// itd.
