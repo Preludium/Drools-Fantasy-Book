@@ -12,7 +12,7 @@ rule "Init"
 	then
 		Action a = new Action("Are you going to be upset when you don't find Harry Potter?", null);
 		String[] answers = { "Yes", "No" };
-		a.setAnswer(answers[askQuestion(a.question, answers)]);		
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);		
         insert(a);
 end
 
@@ -29,7 +29,7 @@ rule "I know where to find him if I need him."
 	then
 		Action a = new Action("Are you new to fantasy genre?", null);
 		String[] answers = { "Yes", "No", "Maybe" };
- 		a.setAnswer(answers[askQuestion(a.question, answers)]);
+ 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
  		insert(a);
 end
 
