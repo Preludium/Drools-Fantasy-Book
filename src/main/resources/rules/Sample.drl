@@ -6,12 +6,18 @@ declare Action
 	question: String @key
 	answer: String
 end
+
+declare ActionList
+	question: String @key
+	books: String[]
+	chosen: boolean[]
+end
  
 rule "Init"
 	when
 	then
 		Action a = new Action("Are you going to be upset when you don't find Harry Potter?");
-		String[] answers = { "Yes", "No" };
+		String[] answers = { "Yes", "No" };	
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);		
         insert(a);
 end
@@ -85,27 +91,82 @@ rule "I like to be held in suspense. Preferably for years at a time."
 	when
 		Action(question == "Does the series have to be finished?" && answer == "No")
 	then
-		Action a = new Action("Take the high road or the low road?");
+		String question = "Take the high road or the low road?";
 		String[] answers = {"Low Fantasy", "High Fantasy"};
+		String[] books = {"\"Song of Ice and Fire\" George R.R. Martin", "\"The Way of Kings\" Brandon Sanderson"};
+		showAnswers(books, chooseAnswer(question, answers));
+end
+
+rule "Wizards and barbarians? What's not to like?"
+	when
+		Action(question == "Do the words Sword and Sorcery have a positive connotation for you?" && answer == "Yes")
+	then
+		Action a = new Action("Roleplayer?");
+		String[] answers = { "Yes", "No" };
 		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
 		insert(a);
 end
 
-rule "Low Fantasy"
+rule "No, the words Sword and Sorcery have a negative connotation for me."
 	when
-		Action(question == "Take the high road or the low road?" && answer == "Low Fantasy")
+		Action(question == "Do the words Sword and Sorcery have a positive connotation for you?" && answer == "No")
 	then
-		showAnswer("\"A Song of Ice and Fire\" George R.R. Martin");
+		Action a = new Action("Looking for an old-fashioned Trilogy?");
+		String[] answers = { "Yes", "No" };
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
 end
 
-rule "High Fantasy"
+rule "Three is my lucky number."
 	when
-		Action(question == "Take the high road or the low road?", && answer == "High Fantasy")
+		Action(question == "Looking for an old-fashioned Trilogy?" && answer == "Yes")
 	then
-		showAnswer("\"The Way of Kings\" Brandon Sanderson");
+		String question = "What shall we read about?";
+		String[] answers = {"Thieves", "MacGuffins", "Assassins", "Magicians"};
+		String[] books = {"\"The Mistborn Trilogy\" Brandon Sanderson", "\"The Sword of Shannara Trilogy\" Terry Brooks",
+			"\"The Farseer Trilogy\" Robin Hobb", "\"The Riftwar Saga\" Raymond E. Feist" };
+		showAnswers(books, chooseAnswer(question, answers));
 end
 
+rule "In for a penny, in for a pound I always say."
+	when
+		Action(question == "Looking for an old-fashioned Trilogy?" && answer == "No")
+	then
+		Action a = new Action("So, five or six books enough for you?");
+		String[] answers = { "Yes", "No" };
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
 
+rule "I shall require at least ten."
+	when
+		Action(question == "So, five or six books enough for you?" && answer == "No")
+	then
+		Action a = new Action("Enjoy quests to prevent great evil from conquering the world?");
+		String[] answers = { "Yes", "No" };
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
+	
+rule "Good vs. Evil on an epic scale, please."
+	when
+		Action(question == "Enjoy quests to prevent great evil from conquering the world?" && answer == "Yes")
+	then
+		String question = "Who will save us?";
+		String[] answers = { "The Seeker of Truth", "The One Power" };
+		String[] books = { "\"The Sword of Truth Series\" Terry Goodkind", "\"The Wheel of Time\" Robert Jordan" };
+		showAnswers(books, chooseAnswer(question, answers));
+end
 
+rule "I need a little more complexity."
+	when
+		Action(question == "Enjoy quests to prevent great evil from conquering the world?" && answer == "No")
+	then
+		String question = "Choose wisely, this is the end.";
+		String[] answers = { "Earth in the Shadows", "Weaving Timeline" };
+		String[] books = { "\"The Chronicles of Amber\" Roger Zelazny", "\"The Malazan Book of the Fallen Series\" Steven Erikson" };
+		showAnswers(books, chooseAnswer(question, answers));
+end
 
-
+	
+	
