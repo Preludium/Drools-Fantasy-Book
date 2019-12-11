@@ -78,10 +78,15 @@ rule "I own The Sword and the Stone on DVD and VHS."
 	when
 		Action(question == "Like the Arthurian legend?" && answer == "Yes")
 	then
-		Action a = new Action("Which character do you like best?");
+		String question = "Which character do you like best?";	
 		String[] answers = {"Morgan Le Faye", "Merlin", "Arthur"};
-		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
-		insert(a);
+		String[] books = {"\"The Mists of Avalon\" Marion Zimmer Bradley", "\"The Crystal Cave\" Mary Steward", "\"The Once and Future King\" T. H. White"};
+		showAnswers(books, chooseAnswer(question, answers));
+		
+		//Action a = new Action("Which character do you like best?");
+		//String[] answers = {"Morgan Le Faye", "Merlin", "Arthur"};
+		//a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		//insert(a);
 end
 
 rule "Like the Arthurian legend?, No"
@@ -94,26 +99,26 @@ rule "Like the Arthurian legend?, No"
 		insert(a);
 end
 
-rule "Which character do you like best?, Morgan Le Faye"
-	when
-		Action(question == "Which character do you like best?" && answer == "Morgan Le Faye")
-	then
-		showAnswer("\"The Mists of Avalon\" Marion Zimmer Bradley");
-end
+//rule "Which character do you like best?, "
+//	when
+//		Action(question == "Which character do you like best?" && answer == "Morgan Le Faye")
+//	then
+//		showAnswer("\"The Mists of Avalon\" Marion Zimmer Bradley");
+//end
 
-rule "Which character do you like best?, Merlin"
-	when
-		Action(question == "Which character do you like best?" && answer == "Merlin")
-	then
-		showAnswer("\"The Crystal Cave\" Mary Steward");
-end
+//rule "Which character do you like best?, Merlin"
+//	when
+//		Action(question == "Which character do you like best?" && answer == "Merlin")
+//	then
+//		showAnswer("\"The Crystal Cave\" Mary Steward");
+//end
 
-rule "Which character do you like best?, Arthur"
-	when
-		Action(question == "Which character do you like best?" && answer == "Arthur")
-	then
-		showAnswer("\"The Once and Future King\" T. H. White");
-end
+//rule "Which character do you like best?, Arthur"
+//	when
+//		Action(question == "Which character do you like best?" && answer == "Arthur")
+//	then
+//		showAnswer("\"The Once and Future King\" T. H. White");
+//end
 
 rule "I'm a city-person"
 	when
@@ -177,10 +182,10 @@ rule "I donate to the WWF. Not the wrestling one."
 	when
 		Action(question == "Animals more your thing?" && answer == "Yes")
 	then
-		Action a = new Action("What's your ideal pet?");
+		String question = "What's your ideal pet?";
 		String[] answers = {"Unicorn", "Bunny", "Dragon"};
-		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
-		insert(a);
+		String[] books = {"\"The Last Unicorn\" Peter S. Beagle", "\"Watership Down\" Richard Adams", "\"Dragonflight\" Anne McCaffrey"};
+		showAnswers(books, chooseAnswer(question, answers));
 end
 
 rule "I have allergies."
@@ -193,35 +198,35 @@ rule "I have allergies."
 		insert(a);
 end
 
-rule "What's your ideal pet?, Unicorn"
-	when
-		Action(question == "What's your ideal pet?" && answer == "Unicorn")
-	then
-		showAnswer("\"The Last Unicorn\" Peter S. Beagle");
-end
+//rule "What's your ideal pet?, Unicorn"
+//	when
+//		Action(question == "What's your ideal pet?" && answer == "Unicorn")
+//	then
+//		showAnswer("\"The Last Unicorn\" Peter S. Beagle");
+//end
 
-rule "What's your ideal pet?, Bunny"
-	when
-		Action(question == "What's your ideal pet?" && answer == "Bunny")
-	then
-		showAnswer("\"Watership Down\" Richard Adams");
-end
+//rule "What's your ideal pet?, Bunny"
+//	when
+//		Action(question == "What's your ideal pet?" && answer == "Bunny")
+//	then
+//		showAnswer("\"Watership Down\" Richard Adams");
+//end
 
-rule "What's your ideal pet?, Dragon"
-	when
-		Action(question == "What's your ideal pet?" && answer == "Dragon")
-	then
-		showAnswer("\"Dragonflight\" Anne McCaffrey");
-end
+//rule "What's your ideal pet?, Dragon"
+//	when
+//		Action(question == "What's your ideal pet?" && answer == "Dragon")
+//	then
+//		showAnswer("\"Dragonflight\" Anne McCaffrey");
+//end
 
 rule "I'm a revisionist myself."
 	when
 		Action(question == "How about some alternate history?" && answer == "Yes")
 	then
-		Action a = new Action("Romance or warring magicians?");
+		String question = "Romance or warring magicians?";
 		String[] answers = {"Romance", "Magicians"};
-		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
-		insert(a);
+		String[] books = {"\"Kushiel's Legacy Series\" Jacqueline Carey", "\"Jonathan Strange & Mr. Norrell\" Susanne Clarke"};
+		showAnswers(books, chooseAnswer(question, answers));
 end
 
 rule "I never paid any attencion in history class."
@@ -234,19 +239,19 @@ rule "I never paid any attencion in history class."
 		insert(a);
 end
 
-rule "Romance or warring magicians?, Romance"
-	when
-		Action(question == "Romance or warring magicians?" && answer == "Romance")
-	then
-		showAnswer("\"Kushiel's Legacy Series\" Jacqueline Carey");
-end
+//rule "Romance or warring magicians?, Romance"
+//	when
+//		Action(question == "Romance or warring magicians?" && answer == "Romance")
+//	then
+//		showAnswer("\"Kushiel's Legacy Series\" Jacqueline Carey");
+//end
 
-rule "Romance or warring magicians?, Magicians"
-	when
-		Action(question == "Romance or warring magicians?" && answer == "Magicians")
-	then
-		showAnswer("\"Jonathan Strange & Mr. Norrell\" Susanne Clarke");
-end
+//rule "Romance or warring magicians?, Magicians"
+//	when
+//		Action(question == "Romance or warring magicians?" && answer == "Magicians")
+//	then
+//		showAnswer("\"Jonathan Strange & Mr. Norrell\" Susanne Clarke");
+//end
 
 rule "The other two options ended with some strange choices."
 	when
@@ -262,39 +267,39 @@ rule "Let's keep this casual."
 	when
 		Action(question == "Ready to dive into a series?" && answer == "No")
 	then
-		Action a = new Action("With pirates or without?");
-		String[] answers = {"Pirates Please", "No pirates here. \nNo siree, Bob. \nNo pirates at all"};
-		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
-		insert(a);
+		String question = "With pirates or without?";
+		String[] answers = {"Pirates Please", "No pirates here. No siree, Bob. No pirates at all"};
+		String[] books = {"\"The Princess Bride\" William Goldman", "\"Stardust\" Neil Gaiman"};
+		showAnswers(books, chooseAnswer(question, answers));
 end
 
 rule "How about an episodic series?"
 	when
 		Action(question == "Ready to dive into a series?" && answer == "Maybe")
 	then
-		Action a = new Action("What's your pleasure?");
+		String question = "What's your pleasure?";
 		String[] answers = {"Bureaucratic Satire", "Religious Satire", "Fun with Puns"};
-		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
-		insert(a);
+		String[] books = {"\"Going Postal\" Terry Pratchett", "\"Small Gods\" Terry Pratchett", "\"Xanth Series\" Piers Anthony"};
+		showAnswers(books, chooseAnswer(question, answers));
 end
 
-rule "What's your pleasure?, Bureaucratic Satire"
-	when
-		Action(question == "What's your pleasure?" && answer == "Bureaucratic Satire")
-	then
-		showAnswer("\"Going Postal\" Terry Pratchett");
-end
+//rule "What's your pleasure?, Bureaucratic Satire"
+//	when
+//		Action(question == "What's your pleasure?" && answer == "Bureaucratic Satire")
+//	then
+//		showAnswer("\"Going Postal\" Terry Pratchett");
+//end
 
-rule "What's your pleasure?, Relugious Satire"
-	when
-		Action(question == "What's your pleasure?" && answer == "Religious Satire")
-	then
-		showAnswer("\"Small Gods\" Terry Pratchett");
-end
+//rule "What's your pleasure?, Relugious Satire"
+//	when
+//		Action(question == "What's your pleasure?" && answer == "Religious Satire")
+//	then
+//		showAnswer("\"Small Gods\" Terry Pratchett");
+//end
 
-rule "What's your pleasure?, Fun with Puns"
-	when
-		Action(question == "What's your pleasure?" && answer == "Fun with Puns")
-	then
-		showAnswer("\"Xanth Series\" Piers Anthony");
-end
+//rule "What's your pleasure?, Fun with Puns"
+//	when
+//		Action(question == "What's your pleasure?" && answer == "Fun with Puns")
+//	then
+//		showAnswer("\"Xanth Series\" Piers Anthony");
+//end
