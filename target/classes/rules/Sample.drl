@@ -168,5 +168,50 @@ rule "I need a little more complexity."
 		showAnswers(books, chooseAnswer(question, answers));
 end
 
+rule "That should keep me busy."
+	when
+		Action(question == "So, five or six books enough for you?" && answer == "Yes")
+	then
+		Action a = new Action("Enjoy stories about orphaned farm boys?");
+		String[] answers = { "Yes", "No" };
+		a.setAnswer(answers[askQuestion(a.getQuestion(), answers)]);
+		insert(a);
+end
 	
+rule "Yes, I enjoy stories about orphaned farm boys."
+	when
+		Action(question == "Enjoy stories about orphaned farm boys?" && answer == "Yes")
+	then
+		showAnswer("No books for you, sorry :(");
+end	
 	
+rule "Tough."
+	when
+		Action(question == "Enjoy stories about orphaned farm boys?" && answer == "No")
+	then
+		showAnswer("\"The Codex Alera\" Jim Butcher\n\"The Belgariad\" David Eddings");
+end
+
+rule "How about a trilogy about trilogies?"
+	when
+		Action(question == "Looking for an old-fashioned Trilogy?" && answer == "Maybe")
+	then
+		showAnswer("\"The Chronicles of Thomas Covenant, The Unbeliever\" Stephen R. Donaldson");
+end
+
+rule "Yes, a roleplayer."
+	when
+		Action(question == "Roleplayer?" && answer == "Yes")
+	then
+		showAnswer("\"The Legend od Drizzt\" R.A. Salvatore");
+end
+
+rule "No, not a roleplayer."
+	when
+		Action(question == "Roleplayer?" && answer == "No")
+	then
+		String question = "More wizards of barbarians?";
+		String[] answers = { "Barbarians", "Wizards" };
+		String[] books = { "\"Chronicles of Conan the Barbarian\" Robert E. Howard", "\"The Elric Saga\" Michael Moorcock" };
+		showAnswers(books, chooseAnswer(question, answers));
+end
