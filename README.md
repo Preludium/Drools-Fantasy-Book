@@ -1,1 +1,1 @@
-# Init SI project repo
+# Java Drools AI project
